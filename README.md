@@ -19,8 +19,8 @@ problem.fluents
 # Easy progression / regression
 s0 = problem.init
 act = list(problem.actions)[0]
-s1 = tl.progress(s0, a)
-s2 = tl.regress(problem.goal, a)
+s1 = tl.progress(s0, act)
+s2 = tl.regress(problem.goal, act)
 
 # Easy action/fluent lookup
 act = problem.action('move loc1 loc2')
