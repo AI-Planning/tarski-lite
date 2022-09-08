@@ -1,4 +1,6 @@
 
+import os
+
 import tarski
 from tarski.io import PDDLReader
 from tarski.io import fstrips as iofs
@@ -32,6 +34,7 @@ def fix_name(s):
         s = s.replace('(', ' ').replace(')', '')
     # act param
     return s
+
 
 class Action:
     def __init__(self, name, pre, add, delete):
@@ -76,6 +79,21 @@ class STRIPS:
 
     def fluent(self, name):
         return fix_name(name)
+
+    def parse_plan(self, plan):
+        # check if it's a file
+        if os.path.isfile(plan):
+            with open(plan) as f:
+                anames = f.read().strip().split('\n')
+        # check if it's a string
+        elif isinstance(plan, str):
+            anames = plan.strip().split('\n')
+        # check if it's a list
+        elif isinstance(plan, list):
+            anames = plan
+        else:
+            raise Exception("Unknown plan type")
+        return [self.action(a) for a in anames]
 
     def ground_problem(self, problem):
         operators = ground_problem_schemas_into_plain_operators(problem)

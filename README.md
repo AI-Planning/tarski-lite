@@ -26,6 +26,11 @@ s2 = tl.regress(problem.goal, act)
 act = problem.action('move loc1 loc2')
 fluent = problem.fluent('connected loc1 loc2')
 assert fluent == problem.fluent('(connected loc1 loc2)')
+
+# parses plans from file, string, or list
+plan = problem.parse_plan('plan.ipc')
+plan = problem.parse_plan('(move loc1 loc2)\n(move loc2 loc3)')
+plan = problem.parse_plan(['move loc1 loc2', 'move loc2 loc3'])
 ```
 
 ## Requirements

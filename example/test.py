@@ -4,7 +4,8 @@ import tarskilite as tl
 problem = tl.STRIPS('domain.pddl', 'problem.pddl')
 
 # Set of Fluent objects
-print(problem.fluents)
+print("Fluents:")
+print('\n'.join([f" - ({f})" for f in problem.fluents]))
 
 # Easy progression / regression
 s0 = problem.init
@@ -16,3 +17,7 @@ s2 = tl.regress(problem.goal, a2)
 # Easy action/fluent lookup
 fluent = problem.fluent('connected loc1 loc2')
 assert fluent == problem.fluent('(connected loc1 loc2)')
+
+plan = problem.parse_plan('plan.ipc')
+print("\nPlan:")
+print('\n'.join([f" - ({a})" for a in plan]))
